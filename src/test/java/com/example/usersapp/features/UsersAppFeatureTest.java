@@ -99,5 +99,10 @@ public class UsersAppFeatureTest {
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("updated_name"));
+
+        when()
+                .delete("http://localhost:8080/users/" + secondUser.getId())
+                .then()
+                .statusCode(is(200));
     }
 }
