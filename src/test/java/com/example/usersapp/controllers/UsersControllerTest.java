@@ -21,6 +21,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -38,7 +39,7 @@ public class UsersControllerTest {
     private ObjectMapper jsonObjectMapper;
 
     private User newUser;
-
+    private User updatedSecondUser;
     @Before
     public void setUp() {
         User firstUser = new User(
@@ -66,6 +67,12 @@ public class UsersControllerTest {
         );
         given(mockUserRepository.save(newUser)).willReturn(newUser);
 
+        updatedSecondUser = new User(
+                "updated_username",
+                "Updated",
+                "Info"
+        );
+        given(mockUserRepository.save(updatedSecondUser)).willReturn(updatedSecondUser);
     }
 
     @Test
@@ -121,4 +128,27 @@ public class UsersControllerTest {
                 .perform(get("/users/1"))
                 .andExpect(jsonPath("$.userName", is("someone")));
     }
+
+    @Test
+    public void updatedUserById_success_returnsStatusOk() throws Exception {
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedUserName() throws Exception {
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.userName",is("updated_username")));
+    }
+
 }

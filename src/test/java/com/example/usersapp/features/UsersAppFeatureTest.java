@@ -88,5 +88,16 @@ public class UsersAppFeatureTest {
                 .statusCode(is(200))
                 .and().body(containsString("Someone"))
                 .and().body(containsString("Else"));
+
+        secondUser.setFirstName("updated_name");
+
+        given()
+                .contentType(JSON)
+                .and().body(secondUser)
+                .when()
+                .patch("http://localhost:8080/users/" + secondUser.getId())
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("updated_name"));
     }
 }
