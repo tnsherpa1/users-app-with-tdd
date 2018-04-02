@@ -18,11 +18,6 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker-compose'
 
-dockerCompose {
-	useComposeFiles = ['docker-compose.yml']
-}
-dockerCompose.isRequiredBy(test)
-
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -30,15 +25,6 @@ targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-}
-test {
-	dependsOn cleanTest
-
-	testLogging {
-		exceptionFormat "full"
-		events "skipped", "passed", "failed"
-		displayGranularity 2
-	}
 }
 
 dependencies {
@@ -53,3 +39,18 @@ dependencies {
 	compile 'org.flywaydb:flyway-core'
 	compile "com.google.guava:guava:16+"
 }
+
+test {
+	dependsOn cleanTest
+
+	testLogging {
+		exceptionFormat "full"
+		events "skipped", "passed", "failed"
+		displayGranularity 2
+	}
+}
+
+dockerCompose {
+	useComposeFiles = ['docker-compose.yml']
+}
+dockerCompose.isRequiredBy(test)
