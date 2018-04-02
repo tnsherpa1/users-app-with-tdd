@@ -12,7 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.stream.Stream;
 
+import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
+import static io.restassured.http.ContentType.JSON;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -57,5 +59,26 @@ public class UsersAppFeatureTest {
                 .statusCode(is(200))
                 .and().body(containsString("Someone"))
                 .and().body(containsString("Else"));
+
+        User userNew = new User(
+                "new_user",
+                "Not",
+                "Yet Created"
+        );
+        given()
+                .contentType(JSON)
+                .and().body(userNew)
+                .when()
+                .post("http://localhost:8080/users")
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("new_user"));
+        when()
+                .get("http://localhost:8080/users/")
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("someone"))
+                .and().body(containsString("Else"))
+                .and().body(containsString("Yet Created"));
     }
 }
