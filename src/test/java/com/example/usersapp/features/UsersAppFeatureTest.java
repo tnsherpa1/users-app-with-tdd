@@ -73,6 +73,7 @@ public class UsersAppFeatureTest {
                 .then()
                 .statusCode(is(200))
                 .and().body(containsString("new_user"));
+
         when()
                 .get("http://localhost:8080/users/")
                 .then()
@@ -80,5 +81,12 @@ public class UsersAppFeatureTest {
                 .and().body(containsString("someone"))
                 .and().body(containsString("Else"))
                 .and().body(containsString("Yet Created"));
+
+        when()
+                .get("http://localhost:8080/users/" + secondUser.getId())
+                .then()
+                .statusCode(is(200))
+                .and().body(containsString("Someone"))
+                .and().body(containsString("Else"));
     }
 }

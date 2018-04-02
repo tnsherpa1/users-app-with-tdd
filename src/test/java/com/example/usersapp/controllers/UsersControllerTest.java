@@ -57,6 +57,7 @@ public class UsersControllerTest {
                 Stream.of(firstUser, secondUser).collect(Collectors.toList());
 
         given(mockUserRepository.findAll()).willReturn(mockUsers);
+        given(mockUserRepository.findOne(1L)).willReturn(firstUser);
 
         newUser = new User(
                 "new_user_for_create",
@@ -103,5 +104,21 @@ public class UsersControllerTest {
                                 .content(jsonObjectMapper.writeValueAsString(newUser))
                 )
                 .andExpect(jsonPath("$.userName", is("new_user_for_create")));
+    }
+
+    @Test
+    public void findUserById_success_returnsStatusOK() throws Exception {
+
+        this.mockMvc
+                .perform(get("/users/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void findUserById_success_returnUserName() throws Exception {
+
+        this.mockMvc
+                .perform(get("/users/1"))
+                .andExpect(jsonPath("$.userName", is("someone")));
     }
 }
