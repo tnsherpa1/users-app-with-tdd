@@ -22,3 +22,13 @@ services:
      - POSTGRES_PASSWORD=password
      - POSTGRES_USER=postgres
      - POSTGRES_DB=pgdev
+  reactdev:
+    image: node
+    ports:
+      - '3000:3000'
+    working_dir: /users-ui
+    volumes:
+      - ./users-ui:/users-ui
+    command: 'npm start'
+    depends_on:
+      - app

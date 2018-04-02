@@ -40,15 +40,20 @@ dependencies {
 	compile "com.google.guava:guava:16+"
 }
 
+task startUIDevServer(type: Exec) {
+	workingDir './users-ui'
+	commandLine 'npm', 'start'
+}
+
 test {
 	dependsOn cleanTest
-
 	testLogging {
 		exceptionFormat "full"
 		events "skipped", "passed", "failed"
 		displayGranularity 2
 	}
 }
+test.finalizedBy(composeDown)
 
 dockerCompose {
 	useComposeFiles = ['docker-compose.yml']
