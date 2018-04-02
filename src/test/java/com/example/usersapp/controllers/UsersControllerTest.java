@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +21,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -73,6 +75,9 @@ public class UsersControllerTest {
                 "Info"
         );
         given(mockUserRepository.save(updatedSecondUser)).willReturn(updatedSecondUser);
+        doAnswer(invocation -> {
+            throw new EmptyResultDataAccessException("ERROR MESSAGE FROM MOCK!!!", 1234);
+        }).when(mockUserRepository).delete(4L);
     }
 
     @Test
@@ -160,5 +165,13 @@ public class UsersControllerTest {
                 .andExpect(status().isOk());
         verify(mockUserRepository, times(1)).delete(1L);
     }
+
+    @Test
+    public void deleteUserById_failure_userNotFoundReturns404() throws Exception {
+        this.mockMvc
+                .perform(delete("/users/4"))
+                .andExpect(status().isNotFound());
+    }
+
 
 }
