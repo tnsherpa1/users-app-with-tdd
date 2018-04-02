@@ -72,7 +72,7 @@ public class UsersControllerTest {
 
         updatedSecondUser = new User(
                 "updated_username",
-                "Updated",
+                "firstname_updated",
                 "Info"
         );
         given(mockUserRepository.save(updatedSecondUser)).willReturn(updatedSecondUser);
@@ -162,6 +162,17 @@ public class UsersControllerTest {
                         .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
                 )
                 .andExpect(jsonPath("$.userName",is("updated_username")));
+    }
+
+    @Test
+    public void updateUserById_success_returnsUpdatedFirstName() throws Exception {
+        this.mockMvc
+                .perform(
+                        patch("/users/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
+                )
+                .andExpect(jsonPath("$.firstName", is("firstname_updated") ));
     }
 
     @Test
