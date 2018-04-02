@@ -61,6 +61,7 @@ public class UsersControllerTest {
 
         given(mockUserRepository.findAll()).willReturn(mockUsers);
         given(mockUserRepository.findOne(1L)).willReturn(firstUser);
+        given(mockUserRepository.findOne(4L)).willReturn(null);
 
         newUser = new User(
                 "new_user_for_create",
@@ -92,6 +93,13 @@ public class UsersControllerTest {
         this.mockMvc
                 .perform(get("/users"))
                 .andExpect(jsonPath("$", hasSize(2)));
+    }
+
+    @Test
+    public void findUserById_failure_userNotFoundReturns404() throws Exception {
+        this.mockMvc
+                .perform(get("/users/4"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -172,6 +180,5 @@ public class UsersControllerTest {
                 .perform(delete("/users/4"))
                 .andExpect(status().isNotFound());
     }
-
 
 }
