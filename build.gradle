@@ -51,4 +51,5 @@ dependencies {
 	runtime 'org.springframework.boot:spring-boot-devtools'
 	testCompile 'io.rest-assured:rest-assured:3.0.6'
 	compile 'org.flywaydb:flyway-core'
+	compile "com.google.guava:guava:16+"
 }
