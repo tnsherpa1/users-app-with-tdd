@@ -20,9 +20,9 @@ import java.util.stream.Stream;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -149,6 +149,16 @@ public class UsersControllerTest {
                         .content(jsonObjectMapper.writeValueAsString(updatedSecondUser))
                 )
                 .andExpect(jsonPath("$.userName",is("updated_username")));
+    }
+
+    @Test
+    public void deleteUserById_success_returnsStatusOk() throws Exception {
+        this.mockMvc
+                .perform(
+                        delete("/users/1")
+                )
+                .andExpect(status().isOk());
+        verify(mockUserRepository, times(1)).delete(1L);
     }
 
 }

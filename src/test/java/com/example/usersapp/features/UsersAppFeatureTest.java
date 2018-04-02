@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.is;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class UsersAppFeatureTest {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -104,5 +105,6 @@ public class UsersAppFeatureTest {
                 .delete("http://localhost:8080/users/" + secondUser.getId())
                 .then()
                 .statusCode(is(200));
+
     }
 }

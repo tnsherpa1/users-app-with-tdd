@@ -48,7 +48,7 @@ public class UsersController {
 
     @DeleteMapping("/users/{userId}")
     public HttpStatus deleteUserById(@PathVariable Long userId) {
-//        userRepository.delete(userId);
+        userRepository.delete(userId);
         return HttpStatus.OK;
     }
 
