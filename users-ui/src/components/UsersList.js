@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-import axios from 'axios'
-import UserNewForm from './UserNewForm'
 import User from './User'
 
 class UsersList extends Component {

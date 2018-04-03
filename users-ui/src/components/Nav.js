@@ -1,13 +1,14 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import UsersList from "./UsersList";
 
 const Nav = () => {
   return (
-    <ul>
+    <ul className='nav'>
       <li>
-        <NavLink exact activeClassName='/active' to='/'>Home</NavLink>
-        <NavLink activeClassName='active' to='/myusers'>Users</NavLink>
+        <NavLink exact activeClassName='active' to='/'>Create</NavLink>
+        <NavLink activeClassName='active' to='/myusers'>View all Users</NavLink>
+        <NavLink activeClassName='active' to='/updateusers'>Update</NavLink>
+        <NavLink activeClassName='active' to='/deleteusers'>Delete</NavLink>
       </li>
     </ul>
   )

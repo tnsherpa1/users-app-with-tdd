@@ -20,22 +20,22 @@ class userNewForm extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form className='column' onSubmit={this.handleSubmit}>
                   <ul className="wrapper">
                     <li className="form-row">
-                      <label htmlFor="title">Username</label>
-                      <input name="userName" type="text" placeholder="Username" onChange={this.handleChange}/>
+                      <label className='header' htmlFor="title">Username</label>
+                      <input autoComplete='off' name="userName" type="text" placeholder="Username" onChange={this.handleChange}/>
                     </li>
                     <li className="form-row">
-                      <label htmlFor="firstname">First Name</label>
-                      <input name="firstName" type="text" placeholder="First Name" onChange={this.handleChange}/>
+                      <label className='header' htmlFor="firstname">First Name</label>
+                      <input autoComplete='off' name="firstName" type="text" placeholder="First Name" onChange={this.handleChange}/>
                     </li>
                     <li className="form-row">
-                      <label htmlFor="lastname">Last Name</label>
-                      <input name="lastName" type="text" placeholder="Last Name" onChange={this.handleChange}/>
+                      <label className='header' htmlFor="lastname">Last Name</label>
+                      <input autoComplete='off' name="lastName" type="text" placeholder="Last Name" onChange={this.handleChange}/>
                     </li>
                     <li className="form-row btn-row">
-                      <button type="submit">Create New User</button>
+                      <button className='button' type="submit">Create New User</button>
                     </li>
                   </ul>
                 </form>
