@@ -21,3 +21,7 @@
 ## [User Stories](https://trello.com/b/lIaAlFhU/users-management-app)
 
 ## [Wireframes](https://imgur.com/a/KsXQy)
+
+### Instructions:
+    - Run docker-compose up to run the application from project root
+    - Run ./gradlew test to run all tests from project root
