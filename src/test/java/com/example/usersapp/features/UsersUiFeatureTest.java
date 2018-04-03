@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
@@ -66,5 +67,8 @@ public class UsersUiFeatureTest {
 
         $("#new-user-link").click();
         $(".column").should(appear);
+
+        $("#view-users").click();
+        $("body").shouldHave(text("someone_else"));
     }
 }
