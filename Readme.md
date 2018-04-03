@@ -11,4 +11,4 @@
     -https://trello.com/b/lIaAlFhU/users-management-app
 
 # Wireframes:
-    <img src="https://imgur.com/a/KsXQy"/>
+    -https://imgur.com/a/KsXQy
