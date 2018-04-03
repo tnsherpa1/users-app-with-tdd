@@ -38,6 +38,13 @@ dependencies {
 	testCompile 'io.rest-assured:rest-assured:3.0.6'
 	compile 'org.flywaydb:flyway-core'
 	compile "com.google.guava:guava:16+"
+
+	testCompile 'org.seleniumhq.selenium:selenium-java:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-api:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-remote-driver:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-chrome-driver:3.9.1'
+	testCompile 'org.seleniumhq.selenium:selenium-support:3.9.1'
+	testCompile 'com.codeborne:selenide:4.10.01'
 }
 
 task startUIDevServer(type: Exec) {
@@ -47,6 +54,7 @@ task startUIDevServer(type: Exec) {
 
 test {
 	dependsOn cleanTest
+	dependsOn startUIDevServer
 	testLogging {
 		exceptionFormat "full"
 		events "skipped", "passed", "failed"
