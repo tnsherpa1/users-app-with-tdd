@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import UserNewForm from './UserNewForm'
+import User from './User'
 
 class UsersList extends Component {
   state = {
@@ -8,19 +10,33 @@ class UsersList extends Component {
 
   async componentDidMount(){
     try {
-      const response = await axios.get("/users/")
+      const response = await axios.get(`/users/`)
       this.setState({users: response.data})
-    } catch(e) {
-      console.log(e)
+    } catch(error) {
+      console.log(error)
     }
   }
+
+  createUser = async(user, index) => {
+      try {
+        const newUserResponse = await axios.post(`/users`, user)
+        const updatedUserResponse = [...this.state.users]
+        updatedUserResponse.push(newUserResponse.data)
+        this.setState({users: updatedUserResponse})
+      } catch(error) {
+        console.log("error creating new user")
+        console.log(error)
+      }
+  }
   render() {
-    const userName = this.state.users.map((user)=>{
-      return <p>{user.username}</p>
+    const userComponents =  this.state.users.map((user, index) => {
+      return <User key={index} username={user.userName} firstname={user.firstName} lastname={user.lastName}/>
     })
     return (
       <div>
-        {userName}
+        {userComponents}
+        <hr/>
+        <UserNewForm createUser={this.createUser}/>
       </div>
     )
   }
