@@ -12,8 +12,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
 
 @RunWith(SpringRunner.class)
@@ -58,5 +60,8 @@ public class UsersUiFeatureTest {
 
         // There should only be two users
         $(".column").should(appear);
+
+        open("http://localhost:3000/myusers");
+        $$(".users").shouldHave(size(2));
     }
 }
