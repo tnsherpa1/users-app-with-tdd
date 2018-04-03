@@ -3,7 +3,7 @@
     -Spring Boot
 
 ## Frontend:
-   -React UI
+    -React UI
 
 ## Docker Images:
     -anapsix/alpine-java:8_jdk_unlimited
