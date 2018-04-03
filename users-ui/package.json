@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "axios": "^0.18.0",
-    "pm2": "^2.10.2"
+    "pm2": "^2.10.2",
+    "react-router-dom": "^4.2.2"
   }
 }
