@@ -18,8 +18,6 @@
 
 ## [Proposal](https://docs.google.com/presentation/d/1aT19PKaaEf06I6ug0cwSDCBbH6N0vCOu-4KwNJbyArs/edit?usp=sharing)
 
-## User Stories:
-    [Trello Board](https://trello.com/b/lIaAlFhU/users-management-app)
+## [User Stories](https://trello.com/b/lIaAlFhU/users-management-app)
 
-## Wireframes:
-    [Link](https://imgur.com/a/KsXQy)
+## [Wireframes](https://imgur.com/a/KsXQy)
