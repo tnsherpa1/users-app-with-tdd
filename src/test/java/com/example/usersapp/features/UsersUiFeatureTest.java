@@ -63,5 +63,8 @@ public class UsersUiFeatureTest {
 
         open("http://localhost:3000/myusers");
         $$(".users").shouldHave(size(2));
+
+        $("#new-user-link").click();
+        $(".column").should(appear);
     }
 }
